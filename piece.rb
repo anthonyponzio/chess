@@ -1,7 +1,7 @@
 class Piece
   attr_writer :pos
 
-  def initialize(pos)
-    @pos = pos
+  def initialize(color, board, pos)
+    @color, @board, @pos = color, board, pos
   end
 end
