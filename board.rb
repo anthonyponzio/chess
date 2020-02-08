@@ -7,6 +7,14 @@ class Board
       Array.new(8) { |col| Piece.new([row, col]) }
     end
   end
+  
+  def move_piece(start_pos, end_pos)
+    piece, self[start_pos] = self[start_pos], nil
+
+    raise "no piece to move at #{start_pos}" if piece.nil?
+
+    self[end_pos] = piece
+  end
 
   def []=(pos, value)
     row, col = pos
