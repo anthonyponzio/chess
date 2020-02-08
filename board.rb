@@ -3,8 +3,8 @@ require_relative "piece"
 class Board
   def initialize
     @rows = Array.new(8) do |row|
-      home_row = [0, 1, 6, 7].include?(row) 
-      Array.new(8) { home_row ? Piece.new : nil }
+      next Array.new(8) if row > 1 && row < 6
+      Array.new(8) { |col| Piece.new([row, col]) }
     end
   end
 end
