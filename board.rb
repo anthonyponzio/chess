@@ -10,10 +10,13 @@ class Board
   
   def move_piece(start_pos, end_pos)
     piece, self[start_pos] = self[start_pos], nil
-
-    raise "no piece to move at #{start_pos}" if piece.nil?
+    
+    if piece.nil?
+      raise ArgumentError.new("no piece to move at #{start_pos}") 
+    end
 
     self[end_pos] = piece
+    piece.pos = end_pos
   end
 
   def []=(pos, value)
