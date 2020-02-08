@@ -7,4 +7,14 @@ class Board
       Array.new(8) { |col| Piece.new([row, col]) }
     end
   end
+
+  def []=(pos, value)
+    row, col = pos
+    @rows[row][col] = value 
+  end
+
+  def [](pos)
+    row, col = pos
+    @rows[row][col]
+  end
 end
