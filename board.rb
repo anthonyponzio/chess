@@ -29,4 +29,8 @@ class Board
     row, col = pos
     @rows[row][col]
   end
+
+  def valid_pos?(pos)
+    pos.all? { |idx| (0..7).include?(idx) }
+  end
 end
