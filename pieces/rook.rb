@@ -5,7 +5,7 @@ class Rook < Piece
   include Slideable
   
   def symbol
-    :R
+    (color == :white) ? "♖" : "♜"
   end
 
   def move_dirs
