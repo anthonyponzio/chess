@@ -28,8 +28,9 @@ module Slideable
 
     new_pos = [(x + dx), (y + dy)]
     while board.valid_pos?(new_pos)
-      unless board[new_pos].nil?
-        unblocked_moves << new_pos if board[new_pos].color != color
+      piece = board[new_pos]
+      unless piece.empty?
+        unblocked_moves << new_pos if piece.color != color
         break
       end
 
