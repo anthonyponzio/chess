@@ -6,6 +6,6 @@ class Piece
   end
 
   def to_s
-    symbol
+    symbol.to_s
   end
 end
