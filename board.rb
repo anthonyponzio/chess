@@ -2,7 +2,7 @@ require_relative "./pieces/pieces"
 
 
 class Board
-  HOME_ROW = [Rook, Queen, Bishop, Queen, Queen, Bishop, Queen, Rook]
+  HOME_ROW = [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook]
 
   attr_reader :rows
   def initialize
