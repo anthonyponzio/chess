@@ -9,4 +9,8 @@ class Piece
   def to_s
     symbol.to_s
   end
+
+  def empty?
+    false
+  end
 end
