@@ -14,11 +14,11 @@ module Slideable
   ]
 
   def horizontal_dirs
-    HORIZONTAL_DIRS
+    HORIZONTAL_DIRS.dup
   end
 
   def diagonal_dirs
-    DIAGONAL_DIRS
+    DIAGONAL_DIRS.dup
   end
 
   def grow_unblocked_moves_in_dir(dx, dy)
