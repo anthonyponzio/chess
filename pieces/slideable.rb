@@ -32,7 +32,17 @@ module Slideable
       new_x += dx
       new_y += dy
     end
-    
+
     unblocked_moves
+  end
+
+  def moves
+    moves = []
+
+    move_dirs.each do |(dx, dy)|
+      moves.concat(grow_unblocked_moves_in_dir(dx, dy))
+    end
+
+    moves
   end
 end
