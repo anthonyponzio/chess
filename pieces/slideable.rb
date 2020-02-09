@@ -12,4 +12,12 @@ module Slideable
     [1, -1],  # down-left
     [1, 1],   # down-right
   ]
+
+  def horizontal_dirs
+    HORIZONTAL_DIRS
+  end
+
+  def diagonal_dirs
+    DIAGONAL_DIRS
+  end
 end
