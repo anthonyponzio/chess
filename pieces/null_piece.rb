@@ -9,6 +9,6 @@ class NullPiece < Piece
   end
 
   def symbol
-    :N
+    " "
   end
 end
