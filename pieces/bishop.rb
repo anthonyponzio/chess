@@ -5,7 +5,7 @@ class Bishop < Piece
   include Slideable
 
   def symbol
-    :B
+    :white ? "♗" : "♝"
   end
 
   def move_dirs
