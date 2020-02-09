@@ -6,10 +6,6 @@ class Piece
   end
 
   def to_s
-    "#{symbol}"
-  end
-
-  def symbol
-    raise '#symbol needs to be implemented by subclass'
+    symbol
   end
 end
