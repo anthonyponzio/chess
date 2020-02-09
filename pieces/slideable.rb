@@ -20,4 +20,19 @@ module Slideable
   def diagonal_dirs
     DIAGONAL_DIRS
   end
+
+  def grow_unblocked_moves_in_dir(dx, dy)
+    board_bounds = (0..7)
+    unblocked_moves = []
+    x, y = pos
+
+    new_x, new_y = x + dx, y + dy
+    while board_bounds.include?(new_x) && board_bounds.include?(new_y)
+      unblocked_moves << [new_x, new_y]
+      new_x += dx
+      new_y += dy
+    end
+    
+    unblocked_moves
+  end
 end
