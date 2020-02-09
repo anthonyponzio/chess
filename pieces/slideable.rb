@@ -26,11 +26,16 @@ module Slideable
     unblocked_moves = []
     x, y = pos
 
-    new_x, new_y = x + dx, y + dy
-    while board_bounds.include?(new_x) && board_bounds.include?(new_y)
-      unblocked_moves << [new_x, new_y]
-      new_x += dx
-      new_y += dy
+    new_pos = [(x + dx), (y + dy)]
+    while board.valid_pos?(new_pos)
+      unless board[new_pos].nil?
+        unblocked_moves << new_pos if board[new_pos].color != color
+        break
+      end
+
+      unblocked_moves << new_pos
+      new_pos[0] += dx
+      new_pos[1] += dy
     end
 
     unblocked_moves
