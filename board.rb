@@ -1,11 +1,28 @@
-require_relative "./pieces/piece"
+require_relative "./pieces/pieces"
+
 
 class Board
+  HOME_ROW = [Rook, Queen, Bishop, Queen, Queen, Bishop, Queen, Rook]
+
+  attr_reader :rows
   def initialize
-    @rows = Array.new(8) do |row|
-      next Array.new(8) if row > 1 && row < 6
-      color = row > 1 ? :black : :white
-      Array.new(8) { |col| Piece.new(color, self, [row, col]) }
+    @sentinel = NullPiece.instance
+    @rows = build_board
+  end
+
+  def build_board
+    Array.new(8) do |row|
+      color = row <= 1 ? :black : :white
+      
+      case row
+      when 0, 7
+        home_row = (row == 0) ? HOME_ROW.reverse : HOME_ROW
+        Array.new(8) { |col| home_row[col].new(color, self, [row, col]) }
+      when 1, 6
+        Array.new(8) { |col| Queen.new(color, self, [row, col]) }
+      else
+        Array.new(8, @sentinel)
+      end      
     end
   end
   
