@@ -13,4 +13,8 @@ class Piece
   def empty?
     false
   end
+
+  def valid_move?(pos)
+    moves.include?(pos)
+  end
 end
