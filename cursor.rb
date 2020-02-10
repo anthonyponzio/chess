@@ -78,14 +78,11 @@ class Cursor
   def handle_key(key)
     case key
     when :space, :return
-      puts "pressed enter or space"
       return cursor_pos
     when :up, :down, :left, :right
-      puts "pressed up down left or right"
       update_pos(MOVES[key])
       return nil
     when :ctrl_c
-      puts "pressed exit"
       Process.exit(0)
     end
   end
