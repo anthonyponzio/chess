@@ -19,7 +19,7 @@ class Board
         home_row = (row == 0) ? HOME_ROW.reverse : HOME_ROW
         Array.new(8) { |col| home_row[col].new(color, self, [row, col]) }
       when 1, 6
-        Array.new(8) { |col| Queen.new(color, self, [row, col]) }
+        Array.new(8) { |col| Pawn.new(color, self, [row, col]) }
       else
         Array.new(8, @sentinel)
       end      
