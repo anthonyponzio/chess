@@ -8,13 +8,12 @@ class Display
   end
 
   def render
-    rows = @board.rows
-
-    rows.each_with_index do |row, row_i|
+    @board.rows.each_with_index do |row, row_i|
       str_row = row.map.with_index do |piece, col_i|
         pos = [row_i, col_i]
+        cursor_bkg = pos == (@cursor.cursor_pos) ? :magenta : nil 
         bkg = pos.sum.even? ? :light_blue : :black
-        " #{piece} ".colorize(:background => bkg)
+        " #{piece} ".colorize(:background => cursor_bkg || bkg)
       
       end
       puts str_row.join("")
