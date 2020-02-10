@@ -22,21 +22,21 @@ module Slideable
   end
 
   def grow_unblocked_moves_in_dir(dx, dy)
-    board_bounds = (0..7)
     unblocked_moves = []
-    x, y = pos
+    row, col = pos
 
-    new_pos = [(x + dx), (y + dy)]
+    new_pos = [(row + dx), (col + dy)]
     while board.valid_pos?(new_pos)
       piece = board[new_pos]
-      unless piece.empty?
-        unblocked_moves << new_pos if piece.color != color
-        break
+      if piece.empty?
+        unblocked_moves << new_pos
+        row, col = new_pos
+        new_pos = [row+dx, col+dy]
+        next
       end
 
-      unblocked_moves << new_pos
-      new_pos[0] += dx
-      new_pos[1] += dy
+      unblocked_moves << new_pos if piece.color != color
+      break
     end
 
     unblocked_moves
@@ -46,7 +46,8 @@ module Slideable
     moves = []
 
     move_dirs.each do |(dx, dy)|
-      moves.concat(grow_unblocked_moves_in_dir(dx, dy))
+      p unblocked_moves = grow_unblocked_moves_in_dir(dx, dy)
+      moves.concat(unblocked_moves)
     end
 
     moves
