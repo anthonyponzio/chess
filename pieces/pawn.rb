@@ -14,4 +14,11 @@ class Pawn < Piece
   def forward_dir
     color == :black ? 1 : -1
   end
+
+  def forward_steps
+    row, col = pos
+    moves = [[row + forward_dir, col]]
+    moves << [row + (forward_dir * 2), col] if at_start_row?
+    moves
+  end
 end
