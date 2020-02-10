@@ -60,10 +60,24 @@ end
 board = Board.new
 display = Display.new(board)
 cursor = display.cursor
+start_pos = nil
 
 until false
   display.render
   input = cursor.get_input
+  unless input.nil?
+    if start_pos
+      begin
+        board.move_piece(start_pos, input)
+      rescue ArgumentError => e
+        puts e.message
+        sleep(3)
+      end
+      start_pos = nil
+    else
+      start_pos = input
+    end
+  end
 end
 
 
