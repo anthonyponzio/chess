@@ -5,6 +5,7 @@ class Pawn < Piece
     (color == :white) ? "♙" : "♟"
   end
 
+  private
   def at_start_row?
     row,_ = pos
     (color == :black && row == 1) ||
@@ -16,9 +17,12 @@ class Pawn < Piece
   end
 
   def forward_steps
-    row, col = pos
-    moves = [[row + forward_dir, col]]
-    moves << [row + (forward_dir * 2), col] if at_start_row?
-    moves
+    standard_step = [forward_dir, 0]
+    return standard_step unless at_start_row?
+    [standard_step, [forward_dir * 2, 0]]
+  end
+
+  def side_attacks
+    [[forward_dir, -1], [forward_dir, 1]]
   end
 end
