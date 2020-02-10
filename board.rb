@@ -1,5 +1,5 @@
 require_relative "./pieces/pieces"
-
+require_relative "display"
 
 class Board
   HOME_ROW = [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook]
@@ -8,6 +8,8 @@ class Board
   def initialize
     @sentinel = NullPiece.instance
     @rows = build_board
+    @display = Display.new(self)
+    @display.render
   end
 
   def build_board
