@@ -41,7 +41,7 @@ class Pawn < Piece
 
   def forward_steps
     standard_step = [forward_dir, 0]
-    return standard_step unless at_start_row?
+    return [standard_step] unless at_start_row?
     [standard_step, [forward_dir * 2, 0]]
   end
 
