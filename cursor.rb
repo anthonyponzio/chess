@@ -92,7 +92,7 @@ class Cursor
 
   def update_pos((dx, dy))
     row, col = cursor_pos
-    new_pos = [row + dx, col + dy]
+    new_pos = [row+dx, col+dy]
     @cursor_pos = new_pos if board.valid_pos?(new_pos)
   end
 end

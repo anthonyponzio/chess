@@ -10,6 +10,7 @@ class Display
   end
 
   def render
+    system("clear")
     @board.rows.each_with_index do |row, row_i|
       str_row = row.map.with_index do |piece, col_i|
         pos = [row_i, col_i]
