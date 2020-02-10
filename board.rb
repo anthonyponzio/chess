@@ -33,6 +33,10 @@ class Board
       raise ArgumentError.new("no piece to move at #{start_pos}") 
     end
 
+    unless piece.valid_move?(end_pos)
+      raise ArgumentError.new("cannot move piece to #{end_pos}")
+    end
+
     self[start_pos], self[end_pos] = @sentinel, piece
     piece.pos = end_pos
   end
