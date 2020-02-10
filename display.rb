@@ -11,15 +11,16 @@ class Display
 
   def render
     system("clear")
+    cursor_color =  @cursor.selected ? :green : :blue
     @board.rows.each_with_index do |row, row_i|
       str_row = row.map.with_index do |piece, col_i|
         pos = [row_i, col_i]
-        cursor_bkg = pos == (@cursor.cursor_pos) ? :magenta : nil 
-        bkg = pos.sum.even? ? :light_blue : :black
-        " #{piece} ".colorize(:background => cursor_bkg || bkg)
-      
+        box_color = pos.sum.even? ? :light_red : :black
+        bkg = (@cursor.cursor_pos == pos) ? cursor_color : box_color
+        next " #{piece} ".colorize(:background => bkg)
       end
       puts str_row.join("")
+      # puts String.color_samples
     end
   end
 end
