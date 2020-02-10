@@ -27,13 +27,13 @@ class Board
   end
   
   def move_piece(start_pos, end_pos)
-    piece, self[start_pos] = self[start_pos], nil
+    piece = self[start_pos]  
     
-    if piece.nil?
+    if piece.empty?
       raise ArgumentError.new("no piece to move at #{start_pos}") 
     end
 
-    self[end_pos] = piece
+    self[start_pos], self[end_pos] = @sentinel, piece
     piece.pos = end_pos
   end
 
