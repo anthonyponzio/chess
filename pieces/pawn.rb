@@ -10,4 +10,8 @@ class Pawn < Piece
     (color == :black && row == 1) ||
     (color == :white && row == 6)
   end
+
+  def forward_dir
+    color == :black ? 1 : -1
+  end
 end
