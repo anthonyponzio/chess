@@ -8,8 +8,6 @@ class Board
   def initialize
     @sentinel = NullPiece.instance
     @rows = build_board
-    @display = Display.new(self)
-    @display.render
   end
 
   def build_board
@@ -57,3 +55,15 @@ class Board
     pos.all? { |idx| (0..7).include?(idx) }
   end
 end
+
+# Will be similar to Game class logic
+board = Board.new
+display = Display.new(board)
+cursor = display.cursor
+
+until false
+  display.render
+  input = cursor.get_input
+end
+
+
