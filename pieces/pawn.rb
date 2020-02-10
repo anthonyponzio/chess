@@ -30,7 +30,7 @@ class Pawn < Piece
 
   private
   def at_start_row?
-    row,_ = pos
+    row, _ = pos
     (color == :black && row == 1) ||
     (color == :white && row == 6)
   end
