@@ -7,7 +7,7 @@ class Pawn < Piece
 
   def moves
     moves = []
-    
+
     row, col = pos
     side_attacks.each do |(dx, dy)|
       attack_pos = [row+dx, col+dy]
