@@ -54,6 +54,10 @@ class Board
   def valid_pos?(pos)
     pos.all? { |idx| (0..7).include?(idx) }
   end
+
+  def find_king(color)
+    @rows.flatten.find { |piece| piece.is_a?(King) && piece.color == color }
+  end
 end
 
 # Will be similar to Game class logic
