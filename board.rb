@@ -42,12 +42,14 @@ class Board
     duped_board
   end
   
-  def move_piece(start_pos, end_pos)
+  def move_piece!(start_pos, end_pos)
+    piece = self[start_pos]
+
     self[start_pos], self[end_pos] = @sentinel, piece
     piece.pos = end_pos
   end
 
-  def move_piece!(start_pos, end_pos)
+  def move_piece(start_pos, end_pos)
     piece = self[start_pos]
 
     if piece.empty?
@@ -105,7 +107,7 @@ until false
   unless input.nil?
     if start_pos
       begin
-        board.move_piece!(start_pos, input)
+        board.move_piece(start_pos, input)
       rescue ArgumentError => e
         puts e.message
         sleep(3)
