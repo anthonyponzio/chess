@@ -5,12 +5,12 @@ class Board
   HOME_ROW = [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook]
 
   attr_reader :rows
-  def initialize
+  def initialize(rows = nil)
     @sentinel = NullPiece.instance
-    @rows = build_board
+    @rows = rows || build_rows
   end
 
-  def build_board
+  def build_rows
     Array.new(8) do |row|
       color = row <= 1 ? :black : :white
       
