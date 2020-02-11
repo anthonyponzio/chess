@@ -5,6 +5,7 @@ class Board
   HOME_ROW = [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook]
 
   attr_reader :rows
+
   def initialize(fill = true)
     @sentinel = NullPiece.instance
     @rows = Array.new(8) { Array.new(8, @sentinel) }
@@ -27,6 +28,18 @@ class Board
 
   def add_piece(piece, pos)
     self[pos] = piece
+  end
+
+  def dup
+    duped_board = Board.new(false)
+
+    @rows.flatten.each do |piece|
+      next if piece.empty?
+      duped_piece = piece.dup(duped_board)
+      duped_board.add_piece(duped_piece, duped_piece.pos)
+    end
+
+    duped_board
   end
   
   def move_piece(start_pos, end_pos)
