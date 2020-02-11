@@ -4,9 +4,10 @@ require_relative "cursor"
 class Display
   attr_reader :cursor
 
-  def initialize(board)
+  def initialize(board, debugging=false)
     @board = board
     @cursor = Cursor.new([0,0], board)
+    @debugging = true
   end
 
   def render
@@ -20,7 +21,11 @@ class Display
         next " #{piece} ".colorize(:background => bkg)
       end
       puts str_row.join("")
-      # puts String.color_samples
+    end
+
+    if (@debugging)
+      puts "black in check? #{@board.in_check?(:black)}"
+      puts "white in check? #{@board.in_check?(:white)}"
     end
   end
 end
