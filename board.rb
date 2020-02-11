@@ -91,7 +91,7 @@ class Board
 
   def checkmate?(color)
     pieces = @rows.flatten.select { |piece| piece.color == color }
-    pieces.any? { |piece| !piece.valid_moves.empty? }
+    pieces.all? { |piece| piece.valid_moves.empty? }
   end
 end
 
