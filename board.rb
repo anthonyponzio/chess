@@ -1,5 +1,6 @@
 require_relative "./pieces/pieces"
 require_relative "display"
+require_relative "human_player"
 
 class Board
   HOME_ROW = [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook]
@@ -49,20 +50,18 @@ class Board
     piece.pos = end_pos
   end
 
-  def move_piece(start_pos, end_pos)
+  def move_piece(color, start_pos, end_pos)
     piece = self[start_pos]
 
-    if piece.empty?
-      raise ArgumentError.new("no piece to move at #{start_pos}") 
-    end
+    raise "no piece to move at #{start_pos}" if piece.empty?
 
-    if piece.move_into_check?(end_pos)
-      raise ArgumentError.new("that move would place you in check")
-    end
+    raise "cannot attack your own pieces" if self[end_pos].color == color
 
-    unless piece.valid_moves.include?(end_pos)
-      raise ArgumentError.new("cannot move piece to #{end_pos}")
-    end
+    raise "cannot move pieces that don't belong to you" if piece.color != color
+    
+    raise "that move would place you in check" if piece.move_into_check?(end_pos)
+
+    raise "cannot move piece to #{end_pos}" unless piece.valid_moves.include?(end_pos)
 
     self[start_pos], self[end_pos] = @sentinel, piece
     piece.pos = end_pos
@@ -102,24 +101,15 @@ end
 # Will be similar to Game class logic
 board = Board.new
 display = Display.new(board, true)
-cursor = display.cursor
-start_pos = nil
+player = HumanPlayer.new(:white, display)
 
 until false
-  display.render
-  input = cursor.get_input
-  unless input.nil?
-    if start_pos
-      begin
-        board.move_piece(start_pos, input)
-      rescue ArgumentError => e
-        puts e.message
-        sleep(3)
-      end
-      start_pos = nil
-    else
-      start_pos = input
-    end
+  begin
+    # start_pos, end_pos = player.make_move
+    board.move_piece(player.color, *player.make_move)
+  rescue StandardError => e
+    puts e.message
+    sleep(2)
   end
 end
 
