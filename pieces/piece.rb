@@ -25,4 +25,10 @@ class Piece
   def dup(dup_board)
     self.class.new(@color, dup_board, @pos.dup)
   end
+
+  def move_into_check?(end_pos)
+    duped_board = @board.dup
+    duped_board.move_piece(@pos, end_pos)
+    duped_board.in_check?
+  end
 end
