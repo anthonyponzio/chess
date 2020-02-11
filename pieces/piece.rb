@@ -21,4 +21,8 @@ class Piece
   def inspect
     to_s
   end
+
+  def dup(dup_board)
+    self.class.new(@color, dup_board, @pos.dup)
+  end
 end
