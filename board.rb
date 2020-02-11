@@ -56,6 +56,10 @@ class Board
       raise ArgumentError.new("no piece to move at #{start_pos}") 
     end
 
+    if piece.move_into_check?(end_pos)
+      raise ArgumentError.new("that move would place you in check")
+    end
+
     unless piece.valid_moves.include?(end_pos)
       raise ArgumentError.new("cannot move piece to #{end_pos}")
     end
@@ -85,7 +89,7 @@ class Board
   def in_check?(color)
     king = find_king(color)
     @rows.flatten.any? do |piece|
-      piece.color != color && piece.valid_move?(king.pos)
+      piece.color != color && piece.moves.include?(king.pos)
     end
   end
 

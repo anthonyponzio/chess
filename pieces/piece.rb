@@ -13,10 +13,6 @@ class Piece
   def empty?
     false
   end
-
-  def valid_move?(pos)
-    moves.include?(pos)
-  end
   
   def inspect
     to_s
