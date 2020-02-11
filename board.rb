@@ -43,13 +43,18 @@ class Board
   end
   
   def move_piece(start_pos, end_pos)
-    piece = self[start_pos]  
-    
+    self[start_pos], self[end_pos] = @sentinel, piece
+    piece.pos = end_pos
+  end
+
+  def move_piece!(start_pos, end_pos)
+    piece = self[start_pos]
+
     if piece.empty?
       raise ArgumentError.new("no piece to move at #{start_pos}") 
     end
 
-    unless piece.valid_move?(end_pos)
+    unless piece.valid_moves.include?(end_pos)
       raise ArgumentError.new("cannot move piece to #{end_pos}")
     end
 
