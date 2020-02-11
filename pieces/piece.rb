@@ -31,4 +31,8 @@ class Piece
     duped_board.move_piece(@pos, end_pos)
     duped_board.in_check?
   end
+
+  def valid_moves
+    moves.reject { |pos| move_into_check?(pos) }
+  end
 end
