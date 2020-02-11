@@ -81,6 +81,11 @@ class Board
       piece.color != color && piece.valid_move?(king.pos)
     end
   end
+
+  def checkmate?(color)
+    pieces = @rows.flatten.select { |piece| piece.color == color }
+    pieces.any? { |piece| !piece.valid_moves.empty? }
+  end
 end
 
 # Will be similar to Game class logic
