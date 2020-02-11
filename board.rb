@@ -58,11 +58,18 @@ class Board
   def find_king(color)
     @rows.flatten.find { |piece| piece.is_a?(King) && piece.color == color }
   end
+
+  def in_check?(color)
+    king = find_king(color)
+    @rows.flatten.any? do |piece|
+      piece.color != color && piece.valid_move?(king.pos)
+    end
+  end
 end
 
 # Will be similar to Game class logic
 board = Board.new
-display = Display.new(board)
+display = Display.new(board, true)
 cursor = display.cursor
 start_pos = nil
 
