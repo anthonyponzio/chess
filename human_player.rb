@@ -10,8 +10,9 @@ class HumanPlayer
     @display.render # possibly remove initial render
 
     until start_pos && end_pos
-      input = @display.cursor.get_input
       @display.render # possibly move to before input entry
+      puts "#{@color}'s turn"
+      input = @display.cursor.get_input
       unless input.nil?
         unless start_pos
           start_pos = input

@@ -97,20 +97,3 @@ class Board
     pieces.all? { |piece| piece.valid_moves.empty? }
   end
 end
-
-# Will be similar to Game class logic
-board = Board.new
-display = Display.new(board, true)
-player = HumanPlayer.new(:white, display)
-
-until false
-  begin
-    # start_pos, end_pos = player.make_move
-    board.move_piece(player.color, *player.make_move)
-  rescue StandardError => e
-    puts e.message
-    sleep(2)
-  end
-end
-
-

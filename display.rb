@@ -7,7 +7,7 @@ class Display
   def initialize(board, debugging=false)
     @board = board
     @cursor = Cursor.new([0,0], board)
-    @debugging = true
+    @debugging = debugging
   end
 
   def render
