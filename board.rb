@@ -105,7 +105,7 @@ until false
   unless input.nil?
     if start_pos
       begin
-        board.move_piece(start_pos, input)
+        board.move_piece!(start_pos, input)
       rescue ArgumentError => e
         puts e.message
         sleep(3)
