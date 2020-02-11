@@ -13,4 +13,9 @@ class Game
 
     @current_player = @players.first
   end
+
+  def next_player
+    @players.rotate!
+    @current_player = @players.first
+  end
 end
