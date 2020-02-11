@@ -5,25 +5,28 @@ class Board
   HOME_ROW = [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook]
 
   attr_reader :rows
-  def initialize(rows = nil)
+  def initialize(fill = true)
     @sentinel = NullPiece.instance
-    @rows = rows || build_rows
+    @rows = Array.new(8) { Array.new(8, @sentinel) }
+    fill_board if fill
   end
 
-  def build_rows
-    Array.new(8) do |row|
-      color = row <= 1 ? :black : :white
-      
-      case row
-      when 0, 7
-        home_row = (row == 0) ? HOME_ROW.reverse : HOME_ROW
-        Array.new(8) { |col| home_row[col].new(color, self, [row, col]) }
-      when 1, 6
-        Array.new(8) { |col| Pawn.new(color, self, [row, col]) }
-      else
-        Array.new(8, @sentinel)
-      end      
+  def fill_board
+    [0, 1, 6, 7].each do |row|
+      color = (row <= 1) ? :black : :white
+      home_row = (row == 0) ? HOME_ROW.reverse : HOME_ROW
+      (0..7).each do |col|
+        pos = [row, col]
+        case row
+        when 0,7 then add_piece(home_row[col].new(color, self, pos), pos)
+        when 1,6 then add_piece(Pawn.new(color, self, pos), pos)
+        end
+      end
     end
+  end
+
+  def add_piece(piece, pos)
+    self[pos] = piece
   end
   
   def move_piece(start_pos, end_pos)
