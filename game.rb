@@ -19,10 +19,12 @@ class Game
     @current_player = @players.first
   end
 
+  def gameover?
+    @board.checkmate?(:black) || @board.checkmate?(:white)
+  end
+
   def play
-    checkmate_black = false
-    checkmate_white = false
-    until checkmate_white || checkmate_black
+    until gameover?
       begin
         @board.move_piece(@current_player.color, *@current_player.make_move)
       rescue StandardError => e
@@ -31,11 +33,9 @@ class Game
         retry
       end
       swap_turn!
-      checkmate_black = @board.checkmate?(:black)
-      checkmate_white = @board.checkmate?(:white)
     end
 
-    winner = checkmate_black ? "White" : "Black"
+    winner = @board.checkmate?(:black) ? "White" : "Black"
     puts "Checkmate! #{winner} wins!"
   end
 end
