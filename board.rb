@@ -88,7 +88,8 @@ class Board
   def in_check?(color)
     king = find_king(color)
     @rows.flatten.any? do |piece|
-      piece.color != color && piece.moves.include?(king.pos)
+      piece.color != color &&
+      piece.moves.include?(king.pos)
     end
   end
 
